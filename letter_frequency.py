@@ -13,4 +13,4 @@ def measure(cts):
     return counts
 
 if __name__ == "__main__":
-    print(measure(get_ciphertexts()))
+    print(measure(get_stdin_texts()))

@@ -1,24 +1,55 @@
 #!/usr/bin/python3
 
 import sys
-from matplotlib import pyplot as plt
 
 CT_ALPHABET = bytes(range(83))
 CT_ALPHABET_SIZE = len(CT_ALPHABET)
 
-def get_ciphertexts():
+READABLE_OFFSET = 32
+
+def get_stdin_texts():
     cts = sys.stdin.buffer.read().splitlines()
-    cts = [[y-32 for y in x] for x in cts]
+    cts = [bytes([y - READABLE_OFFSET for y in x]) for x in cts]
     return cts
 
-def get_isomorphs(ct):
-    isomorphs = []
+def print_cts(cts):
+    for ct in cts:
+        print(bytes([l + READABLE_OFFSET for l in ct]).decode())
+
+def get_isomorphs(ct, max_size):
+    isomorphs = set()
     for i, l in enumerate(ct):
-        if l in ct[i+1:]:
-            next_i = ct.index(l, i + 1)
-            if next_i != -1:
-                isomorphs.append((i, next_i - i))
+        offset = ct.find(l, i + 1, i + max_size + 1)
+        while offset != -1:
+            isomorphs.add((i, offset - i - 1))
+            offset = ct.find(l, offset + 1, i + max_size + 1)
     return isomorphs
+
+def autokeyer(pts, autokeyer_alphabet_fn, iv):
+    autokey_alphabets = {}
+    for l in CT_ALPHABET:
+        autokey_alphabets[l] = autokeyer_alphabet_fn(l)
+    cts = []
+    for pt in pts:
+        ct = []
+        for i, l in enumerate(pt):
+            ct.append(autokey_alphabets[iv if i == 0 else ct[-1]][l])
+        cts.append(bytes(ct))
+    return cts
+
+def poly_substitute(pts, ct_alphabet_fn):
+    max_len = max([len(pt) for pt in pts])
+    ct_alphabets = [ct_alphabet_fn(i) for i in range(max_len)]
+    results = []
+    for pt in pts:
+        results.append(bytes([ct_alphabets[i][l] for i, l in enumerate(pt)]))
+    return results
+
+def substitute(pts, ct_alphabet):
+    results = []
+    for pt in pts:
+        results.append(bytes([ct_alphabet[l] for l in pt]))
+    return results
 
 # takes a ciphertext
 # returns a dictionnary, key is letter, value is count

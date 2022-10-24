@@ -1,0 +1,9 @@
+1. Makes a projectile explode powerfully upon collision with creatures covered in slime
+2. Makes a projectile explode upon collision with creatures covered in alcohol
+3. Makes a projectile turn the creatures it hits into living fireball throwers
+4. Makes a projectile turn the creatures it hits into living thunderstorms
+5. Makes creatures hit by a projectile gain a temporary gravity well that draws projectiles in
+6. Makes creatures hit by a projectile grow tentacles in a chaotic manner
+7. Makes four fireballs rotate around a projectile
+8. Makes four... nukes(?!) rotate around a projectile
+9. Makes four plasma beams rotate around a projectile
