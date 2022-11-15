@@ -19,8 +19,8 @@ def generate_no_doubles_ct():
 
 def generate_random_cts(seed):
     random.seed(seed)
-    return [bytes(generate_random_ct()) for _ in range(9)]
-    #return [bytes(generate_no_doubles_ct()) for _ in range(9)]
+    #return [bytes(generate_random_ct()) for _ in range(9)]
+    return [bytes(generate_no_doubles_ct()) for _ in range(9)]
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

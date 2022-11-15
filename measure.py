@@ -8,6 +8,7 @@ import letter_frequency
 import letter_repeats
 import shared_isomorphs
 import letter_distances
+import gapped_pairs_repeats
 
 properties = [
     index_bounds,
@@ -16,7 +17,7 @@ properties = [
     letter_repeats,
     shared_isomorphs,
     letter_distances,
-#    gapped_pairs_repeats,
+    gapped_pairs_repeats,
 ]
 
 for p in properties:

@@ -8,14 +8,12 @@ from random_ciphertext import generate_random_cts
 
 import pickle
 import os
+import sys
 
 CACHE_FILE = "measures.cache"
 
 def main():
-    if os.path.exists(CACHE_FILE):
-        with open(CACHE_FILE, 'rb') as f:
-            (means, stdevs) = pickle.load(f)
-    else:
+    if (not os.path.exists(CACHE_FILE)) or (len(sys.argv) >= 2 and sys.argv[1] == "--no-cache"):
         means = []
         stdevs = []
         measures = []
@@ -31,6 +29,9 @@ def main():
                 stdevs.append(s)
         with open(CACHE_FILE, 'wb') as f:
             pickle.dump((means, stdevs), f)
+    else:
+        with open(CACHE_FILE, 'rb') as f:
+            (means, stdevs) = pickle.load(f)
 
     cts = get_stdin_texts()
     cts_measures = measure(cts)
