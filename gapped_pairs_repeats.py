@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 from common import *
-from statistics import stdev
 
 MAX_SIZE = 15
 
@@ -32,9 +31,7 @@ def measure(cts):
             distances.append(right - left)
     #print(distances)
     #pprint(results)
-    distances_info = [sum(distances) / len(distances), stdev(distances)]
-    gap_amounts_per_ct_info = [sum(gap_amounts_per_ct) / len(gap_amounts_per_ct), stdev(gap_amounts_per_ct)]
-    return gap_amounts + gap_amounts_per_ct_info + distances_info
+    return gap_amounts + data_to_info(gap_amounts) + data_to_info(gap_amounts_per_ct) + data_to_info(distances)
 
 if __name__ == "__main__":
     from pprint import pprint

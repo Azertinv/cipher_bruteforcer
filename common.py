@@ -1,11 +1,19 @@
 #!/usr/bin/python3
 
+from statistics import stdev
+
 import sys
 
 CT_ALPHABET = bytes(range(83))
 CT_ALPHABET_SIZE = len(CT_ALPHABET)
 
 READABLE_OFFSET = 32
+
+def data_to_info(data):
+    data = sorted(data)
+    mean = sum(data) / len(data)
+    median = data[len(data) // 2]
+    return [mean, median, stdev(data), min(data), max(data)]
 
 def get_stdin_texts():
     cts = sys.stdin.buffer.read().splitlines()

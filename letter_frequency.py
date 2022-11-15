@@ -11,6 +11,7 @@ def measure(cts):
     for i in range(len(counts)):
         counts[i] /= sample_size
     return counts
+    # return data_to_info(counts)
 
 if __name__ == "__main__":
     print(measure(get_stdin_texts()))

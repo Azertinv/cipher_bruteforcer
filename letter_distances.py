@@ -12,11 +12,7 @@ def measure(cts):
     for ct in cts:
         for i in range(len(ct) - 1):
             distances.append(modulo_distance(ct[i], ct[i + 1]))
-            # distances.append(ct[i] - ct[i + 1])
-    mean = sum(distances) / len(distances)
-    distances.sort()
-    median = distances[len(distances) // 2]
-    return [mean, median, min(distances), max(distances)]
+    return data_to_info(distances)
 
 if __name__ == "__main__":
     print(measure(get_stdin_texts()))

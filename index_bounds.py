@@ -24,9 +24,7 @@ def measure(cts):
         if len(index) >= 2:
             index.remove(max(index))
         bounds.append(sum(index) + 1)
-    mean = sum(bounds) / len(bounds)
-    median = bounds[len(bounds) // 2]
-    return [mean, median, min(bounds), max(bounds)]
+    return data_to_info(bounds)
 
 if __name__ == "__main__":
     print(measure(get_stdin_texts()))
