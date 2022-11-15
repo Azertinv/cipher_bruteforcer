@@ -25,7 +25,10 @@ def main():
             for k in range(len(measures[0][j])):
                 data = [measures[i][j][k] for i in range(len(measures))]
                 means.append(sum(data) / len(data))
-                stdevs.append(stdev(data))
+                s = stdev(data)
+                if s == 0.0:
+                    s = 0.0000001
+                stdevs.append(s)
         with open(CACHE_FILE, 'wb') as f:
             pickle.dump((means, stdevs), f)
 

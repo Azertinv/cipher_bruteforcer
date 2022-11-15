@@ -12,6 +12,9 @@ def get_stdin_texts():
     cts = [bytes([y - READABLE_OFFSET for y in x]) for x in cts]
     return cts
 
+def get_stdin_plaintexts():
+    pts = sys.stdin.buffer.read().splitlines()
+
 def print_cts(cts):
     for ct in cts:
         print(bytes([l + READABLE_OFFSET for l in ct]).decode())

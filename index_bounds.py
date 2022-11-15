@@ -13,6 +13,7 @@ def measure(cts):
     holes = []
     for index in values:
         index = list(index)
+        # sort the values to calculate the size of the holes
         index.sort()
         index_holes = []
         for i in range(len(index)):
@@ -20,13 +21,11 @@ def measure(cts):
         holes.append(index_holes)
     bounds = []
     for index in holes:
-        if len(index) <= 1:
-            bounds.append(0)
-        else:
+        if len(index) >= 2:
             index.remove(max(index))
-            bounds.append(sum(index))
+        bounds.append(sum(index) + 1)
     mean = sum(bounds) / len(bounds)
-    median = bounds[(len(bounds)+1) // 2]
+    median = bounds[len(bounds) // 2]
     return [mean, median, min(bounds), max(bounds)]
 
 if __name__ == "__main__":
