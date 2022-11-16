@@ -9,23 +9,39 @@ CT_ALPHABET_SIZE = len(CT_ALPHABET)
 
 READABLE_OFFSET = 32
 
-def data_to_info(data):
+def data_to_info(data, prefix=""):
+    if prefix != "":
+        prefix = prefix + "_"
     data = sorted(data)
-    mean = sum(data) / len(data)
-    median = data[len(data) // 2]
-    return [mean, median, stdev(data), min(data), max(data)]
+    result = {
+        prefix+"mean": sum(data) / len(data),
+        prefix+"median": data[len(data) // 2],
+        prefix+"minimum": min(data),
+        prefix+"maximum": max(data),
+        prefix+"stdev": stdev(data),
+    }
+    return result
 
 def get_stdin_texts():
-    cts = sys.stdin.buffer.read().splitlines()
-    cts = [bytes([y - READABLE_OFFSET for y in x]) for x in cts]
-    return cts
-
-def get_stdin_plaintexts():
     pts = sys.stdin.buffer.read().splitlines()
+    if "--normalize-input" in sys.argv:
+        return normalize_pts(pts)
+    else:
+        return [bytes([y - READABLE_OFFSET for y in x]) for x in pts]
 
 def print_cts(cts):
     for ct in cts:
         print(bytes([l + READABLE_OFFSET for l in ct]).decode())
+
+def get_alphabet(pts):
+    return bytes(set(b"".join(pts)))
+
+def normalize_pt(pt, alphabet):
+    return bytes([alphabet.index(l) for l in pt])
+
+def normalize_pts(pts):
+    alphabet = get_alphabet(pts)
+    return [normalize_pt(pt, alphabet) for pt in pts]
 
 def get_isomorphs(ct, max_size):
     isomorphs = set()

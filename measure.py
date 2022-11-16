@@ -24,11 +24,12 @@ for p in properties:
     assert hasattr(p, "measure")
 
 def measure(cts):
-    return [p.measure(cts) for p in properties]
+    return dict([(p, p.measure(cts)) for p in properties])
 
 if __name__ == "__main__":
     results = measure(get_stdin_texts())
-    for p, r in zip(properties, results):
+    for p, r in results.items():
         print(p.__name__)
-        print(r)
+        for name, value in r.items():
+            print(name, ":", value)
         print()

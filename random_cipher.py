@@ -26,17 +26,22 @@ for c in ciphers:
     assert hasattr(c, "generate")
     assert hasattr(c, "encrypt")
 
-def main():
-    pts = get_stdin_texts()
-    random.seed(44)
+def random_cipher_stack(n=5):
     cipher_stack = []
-    for _ in range(5):
+    for _ in range(n):
         cipher = random.choice(ciphers)
         params = cipher.generate()
         cipher_stack.append((cipher, params))
+    return cipher_stack
+
+def encrypt_with_cipher_stack(cipher_stack, pts):
     for (cipher, params) in cipher_stack:
         pts = cipher.encrypt(pts, params)
-    print_cts(pts)
+    return pts
 
 if __name__ == "__main__":
-    main()
+    pts = get_stdin_texts()
+    random.seed(44)
+    cipher_stack = random_cipher_stack(5)
+    cts = encrypt_with_cipher_stack(cipher_stack, pts)
+    print_cts(cts)

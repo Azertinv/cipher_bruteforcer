@@ -10,7 +10,8 @@ def measure(cts):
         for index, size in i:
             if size - 1 < len(isomorphs_size):
                 isomorphs_size[size] += 1
-    return isomorphs_size
+    # TOO return raw values too
+    return data_to_info(isomorphs_size)
 
 if __name__ == "__main__":
     print(measure(get_stdin_texts()))

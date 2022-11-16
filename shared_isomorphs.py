@@ -19,9 +19,7 @@ def measure(cts):
                         score += 1/(offset + 1)
                     if (index - offset, size) in isomorphs[j]:
                         score += 1/(offset + 1)
-    score /= sample_size
-    isomorphs_count /= sample_size
-    return [score, isomorphs_count]
+    return {"score": score, "count": isomorphs_count}
 
 if __name__ == "__main__":
     print(measure(get_stdin_texts()))

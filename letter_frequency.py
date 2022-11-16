@@ -7,11 +7,8 @@ def measure(cts):
     for ct in cts:
         for letter in ct:
             counts[letter] += 1
-    sample_size = sum([len(ct) for ct in cts])
-    for i in range(len(counts)):
-        counts[i] /= sample_size
-    return counts
-    # return data_to_info(counts)
+    # TODO FIXME return raw values too
+    return data_to_info(counts)
 
 if __name__ == "__main__":
     print(measure(get_stdin_texts()))

@@ -21,17 +21,19 @@ def measure(cts):
                 offset = ct.find(l, offset + 1)
         results.append(gapped_pairs)
 
-    gap_amounts_per_ct = []
-    gap_amounts = [0]*(MAX_SIZE - 1)
+    gap_count_per_ct = []
+    gap_count = [0]*(MAX_SIZE - 1)
     distances = []
     for ct in results:
-        gap_amounts_per_ct.append(len(ct))
+        gap_count_per_ct.append(len(ct))
         for left, right, size in ct:
-            gap_amounts[size - 1] += 1
+            gap_count[size - 1] += 1
             distances.append(right - left)
-    #print(distances)
-    #pprint(results)
-    return gap_amounts + data_to_info(gap_amounts) + data_to_info(gap_amounts_per_ct) + data_to_info(distances)
+    result = dict([(str(i)+"_gap_count", gap_count[i]) for i in range(MAX_SIZE-1)])
+    result.update(data_to_info(gap_count, "gap_count"))
+    result.update(data_to_info(gap_count_per_ct, "gap_count_per_ct"))
+    result.update(data_to_info(distances, "distances"))
+    return result
 
 if __name__ == "__main__":
     from pprint import pprint
