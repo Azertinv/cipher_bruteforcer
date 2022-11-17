@@ -5,6 +5,7 @@ from common import *
 import index_bounds
 import isomorphs_size
 import letter_frequency
+import letter_frequency_no_shared_letters
 import letter_repeats
 import shared_isomorphs
 import letter_distances
@@ -14,6 +15,7 @@ properties = [
     index_bounds,
     isomorphs_size,
     letter_frequency,
+    letter_frequency_no_shared_letters,
     letter_repeats,
     shared_isomorphs,
     letter_distances,

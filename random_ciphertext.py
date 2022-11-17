@@ -21,10 +21,10 @@ import sys
 
 def generate_random_cts(seed):
     random.seed(seed)
-    if "--no-doubles" in sys.argv:
-        return [bytes(generate_no_doubles_ct()) for _ in range(9)]
-    else:
+    if "--double-l" in sys.argv:
         return [bytes(generate_random_ct()) for _ in range(9)]
+    else:
+        return [bytes(generate_no_doubles_ct()) for _ in range(9)]
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

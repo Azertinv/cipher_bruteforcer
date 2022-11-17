@@ -15,6 +15,9 @@ def measure(cts):
         index = list(index)
         # sort the values to calculate the size of the holes
         index.sort()
+        # if we don't have enough different values, skip this column
+        if len(index) < 2:
+            continue
         index_holes = []
         for i in range(len(index)):
             index_holes.append((index[i] - index[i - 1]) % CT_ALPHABET_SIZE)

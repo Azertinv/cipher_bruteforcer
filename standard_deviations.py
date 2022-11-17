@@ -2,6 +2,7 @@
 
 from common import *
 
+import math
 from measure import measure
 from statistics import stdev
 from random_ciphertext import generate_random_cts
@@ -23,8 +24,6 @@ def get_means_and_stdevs(no_cache=False):
                 data = [measures[i][j][k] for i in range(len(measures))]
                 means.append(sum(data) / len(data))
                 s = stdev(data)
-                if s == 0.0:
-                    s = 0.0000001
                 stdevs.append(s)
         with open(CACHE_FILE, 'wb') as f:
             pickle.dump((means, stdevs), f)
@@ -33,27 +32,37 @@ def get_means_and_stdevs(no_cache=False):
             (means, stdevs) = pickle.load(f)
     return (means, stdevs)
 
+def get_stdev_from_anchor(stdevs, means, measures):
+    i = 0
+    results = {}
+    for m in measures.keys():
+        results[m] = {}
+        for k, value in measures[m].items():
+            # if the difference is too small to be measured, issue with floating points
+            if math.isclose(measures[m][k], means[i]):
+                results[m][k] = 0.0
+            else:
+                results[m][k] = (measures[m][k]/stdevs[i]) - (means[i]/stdevs[i])
+            i += 1
+    return results
+
 def main():
     import sys
 
-    no_cache = False
-    if "--no-cache" in sys.argv:
-        no_cache = True
-    (means, stdevs) = get_means_and_stdevs(no_cache)
+    (means, stdevs) = get_means_and_stdevs("--no-cache" in sys.argv)
 
     cts = get_stdin_texts()
     cts_measures = measure(cts)
 
-    i = 0
-    for j in cts_measures.keys():
+    results = get_stdev_from_anchor(stdevs, means, cts_measures)
+
+    for j in results.keys():
         print(j.__name__)
-        for k in cts_measures[j].keys():
-            diff = (cts_measures[j][k]/stdevs[i]) - (means[i]/stdevs[i])
+        for k, value in results[j].items():
             print(k+": ", end="")
-            if abs(diff) > 3.5:
+            if abs(value) > 3.5:
                 print("\x1b[0;37;41m", end="")
-            print("{:.1f}\x1b[0;0m".format(diff))
-            i += 1
+            print("{:.2f}\x1b[0;0m".format(value))
         print()
 
 if __name__ == "__main__":
