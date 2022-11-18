@@ -6,6 +6,11 @@ import random
 def generate():
     return [random.randrange(0, 2**31)]
 
+def mutate(params):
+    params = params.copy()
+    params[0] = random.randrange(0, 2**31)
+    return params
+
 def encrypt(pts, params):
     scrambled_ct_alphabet = list(CT_ALPHABET)
     random.seed(params[0])

@@ -3,12 +3,25 @@
 from common import *
 import random
 
+MAX_KEY_SIZE = 50
+
 def generate():
-    size = random.randrange(1, 60)
-    return [random.choices(CT_ALPHABET, k=size)]
+    return random.choices(CT_ALPHABET, k=random.randrange(1, MAX_KEY_SIZE))
+
+def mutate(params):
+    params = params.copy()
+    choice = random.randint(0, 2)
+    random_index = random.randrange(len(params))
+    if choice == 0 and len(params) > 1: # remove char
+        params.pop(random_index)
+    elif choice == 1 and len(params) < MAX_KEY_SIZE: # insert char
+        params.insert(random_index, random.choice(CT_ALPHABET))
+    else: # mutate char
+        params[random_index] = random.choice(CT_ALPHABET)
+    return params
 
 def encrypt(pts, params):
-    key = params[0]
+    key = params
     def ct_alphabet_generator(i):
         shift = key[i % len(key)] % CT_ALPHABET_SIZE
         return CT_ALPHABET[-shift:] + CT_ALPHABET[:-shift]

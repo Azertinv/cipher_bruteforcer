@@ -6,6 +6,11 @@ import random
 def generate():
     return [random.randrange(0, 2**31)]
 
+def mutate(params):
+    params = params.copy()
+    params[0] = random.randrange(0, 2**31)
+    return params
+
 def encrypt(pts, params):
     seed = params[0]
     def ct_alphabet_generator(i):

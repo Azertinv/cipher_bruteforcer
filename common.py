@@ -4,8 +4,8 @@ from statistics import stdev
 
 import sys
 
-CT_ALPHABET = bytes(range(83))
-CT_ALPHABET_SIZE = len(CT_ALPHABET)
+CT_ALPHABET_SIZE = 83
+CT_ALPHABET = bytes(range(CT_ALPHABET_SIZE))
 
 READABLE_OFFSET = 32
 

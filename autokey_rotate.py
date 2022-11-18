@@ -6,6 +6,15 @@ import random
 def generate():
     return [random.randrange(CT_ALPHABET_SIZE), random.random()]
 
+def mutate(params):
+    params = params.copy()
+    choice = random.randint(0, 1)
+    if choice == 0:
+        params[0] = (params[0] + random.randrange(CT_ALPHABET_SIZE - 1)) % CT_ALPHABET_SIZE
+    else:
+        params[1] = 1.0 - params[1]
+    return params
+
 def encrypt(pts, params):
     iv = params[0]
     direction = params[1]
