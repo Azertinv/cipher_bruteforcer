@@ -6,9 +6,12 @@ import random
 def generate():
     return [random.randrange(CT_ALPHABET_SIZE)]
 
-def mutate(params):
+MUTATION_COUNT = 3
+
+def mutate(params, choice):
     params = params.copy()
-    choice = random.randint(0, 2)
+    if choice == -1:
+        choice = 2
     if choice == 0:
         params[0] += 1
     elif choice == 1:

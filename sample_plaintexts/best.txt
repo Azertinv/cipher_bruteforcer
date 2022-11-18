@@ -1,0 +1,9 @@
+1. Makes a projectile explode powerfully upon collision with creatures covered in slime, Secrets of endless lava have been unlocked to you.
+2. Makes a projectile explode upon collision with creatures covered in alcohol, Secrets of Earth's anger have been unlocked to you.
+3. Makes a projectile turn the creatures it hits into living fireball throwers, Secrets of otherworldly life have been unlocked to you.
+4. Makes a projectile turn the creatures it hits into living thunderstorms, Secrets of utter destruction have been unlocked to you.
+5. Makes creatures hit by a projectile gain a temporary gravity well that draws projectiles in,Secrets of Undeath have been unlocked to you.
+6. Makes creatures hit by a projectile grow tentacles in a chaotic manner, Secrets of fire and brimstone have been unlocked to you.
+7. Makes four fireballs rotate around a projectile, Secrets of the Spiral have been unlocked to you.
+8. Makes four... nukes(?!) rotate around a projectile, Secrets of stormy skies have been unlocked to you.
+9. Makes four plasma beams rotate around a projectile, Secrets of jubilation have been unlocked to you.

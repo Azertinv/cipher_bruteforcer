@@ -8,15 +8,18 @@ MAX_KEY_SIZE = 50
 def generate():
     return random.choices(CT_ALPHABET, k=random.randrange(1, MAX_KEY_SIZE))
 
-def mutate(params):
+MUTATION_COUNT = 3
+
+def mutate(params, choice):
     params = params.copy()
-    choice = random.randint(0, 2)
     random_index = random.randrange(len(params))
+    if choice == -1:
+        choice = random.randint(0, 2)
     if choice == 0 and len(params) > 1: # remove char
         params.pop(random_index)
     elif choice == 1 and len(params) < MAX_KEY_SIZE: # insert char
         params.insert(random_index, random.choice(CT_ALPHABET))
-    else: # mutate char
+    elif choice == 2: # mutate char
         params[random_index] = random.choice(CT_ALPHABET)
     return params
 

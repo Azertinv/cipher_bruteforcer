@@ -22,6 +22,11 @@ def data_to_info(data, prefix=""):
     }
     return result
 
+def print_cipher_stack(cipher_stack):
+    for cipher, params in cipher_stack:
+        print(cipher.__name__ + ":")
+        print("\t", params)
+
 def get_stdin_texts():
     pts = sys.stdin.buffer.read().splitlines()
     if "--normalize-input" in sys.argv:

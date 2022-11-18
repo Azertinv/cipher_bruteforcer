@@ -6,7 +6,7 @@ import sys
 import random
 
 def generate_random_ct():
-    return [random.choice(CT_ALPHABET) for _ in range(random.randint(99, 137))]
+    return [rng.choice(CT_ALPHABET) for _ in range(rng.randint(99, 137))]
 
 def generate_no_doubles_ct():
     ct = generate_random_ct()
@@ -19,8 +19,10 @@ def generate_no_doubles_ct():
 
 import sys
 
+rng = random.Random()
+
 def generate_random_cts(seed):
-    random.seed(seed)
+    rng.seed(seed)
     if "--double-l" in sys.argv:
         return [bytes(generate_random_ct()) for _ in range(9)]
     else:
