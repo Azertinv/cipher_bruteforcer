@@ -6,16 +6,16 @@ import random
 def generate():
     return [random.randrange(CT_ALPHABET_SIZE), random.random()]
 
-MUTATION_COUNT = 2
+MUTATION_COUNT = 5
 
 def mutate(params, choice):
     params = params.copy()
     if choice == -1:
-        choice = random.randint(0, 1)
-    if choice == 0: # mutate the IV
-        params[0] = (params[0] + random.randrange(CT_ALPHABET_SIZE - 1)) % CT_ALPHABET_SIZE
-    elif choice == 1: # change the direction
+        choice = 1
+    if choice == 0: # change direction
         params[1] = 1.0 - params[1]
+    elif choice >= 1: # change IV
+        params[0] = (params[0] + random.randrange(CT_ALPHABET_SIZE - 1)) % CT_ALPHABET_SIZE
     return params
 
 def encrypt(pts, params):

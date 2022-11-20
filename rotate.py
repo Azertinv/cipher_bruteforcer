@@ -6,7 +6,7 @@ import random
 def generate():
     return [random.randrange(CT_ALPHABET_SIZE)]
 
-MUTATION_COUNT = 3
+MUTATION_COUNT = 10
 
 def mutate(params, choice):
     params = params.copy()
@@ -16,7 +16,7 @@ def mutate(params, choice):
         params[0] += 1
     elif choice == 1:
         params[0] -= 1
-    elif choice == 2:
+    elif choice >= 2:
         params[0] = random.randrange(CT_ALPHABET_SIZE)
     params[0] %= CT_ALPHABET_SIZE
     return params
@@ -28,6 +28,7 @@ def encrypt(pts, params):
     return substitute(pts, ct_alphabet)
 
 if __name__ == "__main__":
-    cts = encrypt(get_stdin_texts(), [42])
+    import sys
+    cts = encrypt(get_stdin_texts(), [int(sys.argv[1])])
     for ct in cts:
         print(bytes([l + READABLE_OFFSET for l in ct]).decode())

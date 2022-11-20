@@ -6,7 +6,7 @@ import random
 def generate():
     return [random.randrange(0, 2**31)]
 
-MUTATION_COUNT = 1
+MUTATION_COUNT = 5
 
 def mutate(params, _):
     params = params.copy()
